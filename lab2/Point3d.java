@@ -1,7 +1,7 @@
 /**
- * A two-dimensional point class.
+ * A three-dimensional point class.
  **/
-public class Point2d {
+public class Point3d {
 
     /** X coordinate of the point **/
     private double xCoord;
@@ -9,16 +9,20 @@ public class Point2d {
     /** Y coordinate of the point **/
     private double yCoord;
 
-    /** Constructor to initialize point to (x, y) value. **/
-    public Point2d(double x, double y) {
+    /** Z coordinate of the point **/
+    private double zCoord;
+
+    /** Constructor to initialize point to (x, y, z) value. **/
+    public Point3d(double x, double y, double z) {
         xCoord = x;
         yCoord = y;
+        zCoord = z;
     }
 
     /** No-argument constructor: defaults to a point at the origin. **/
-    public Point2d() {
+    public Point3d() {
         // Call two-argument constructor and specify the origin.
-        this(0, 0);
+        this(0, 0, 0);
     }
 
     /** Return the X coordinate of the point. **/
@@ -31,6 +35,11 @@ public class Point2d {
         return yCoord;
     }
 
+    /** Return the Z coordinate of the point. **/
+    public double getZ() {
+        return zCoord;
+    }
+
     /** Set the X coordinate of the point. **/
     public void setX(double val) {
         xCoord = val;
@@ -39,5 +48,10 @@ public class Point2d {
     /** Set the Y coordinate of the point. **/
     public void setY(double val) {
         yCoord = val;
+    }
+
+    /** Set the Z coordinate of the point. **/
+    public void setZ(double val) {
+        zCoord = val;
     }
 }
