@@ -4,10 +4,10 @@
 public class Point2d {
 
     /** X coordinate of the point **/
-    private double xCoord;
+    protected double xCoord;
 
     /** Y coordinate of the point **/
-    private double yCoord;
+    protected double yCoord;
 
     /** Constructor to initialize point to (x, y) value. **/
     public Point2d(double x, double y) {

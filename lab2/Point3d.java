@@ -1,14 +1,9 @@
+import java.lang.Math;
+
 /**
  * A three-dimensional point class.
  **/
-public class Point3d {
-
-    /** X coordinate of the point **/
-    private double xCoord;
-
-    /** Y coordinate of the point **/
-    private double yCoord;
-
+public class Point3d extends Point2d {
     /** Z coordinate of the point **/
     private double zCoord;
 
@@ -21,18 +16,8 @@ public class Point3d {
 
     /** No-argument constructor: defaults to a point at the origin. **/
     public Point3d() {
-        // Call two-argument constructor and specify the origin.
+        // Call three-argument constructor and specify the origin.
         this(0, 0, 0);
-    }
-
-    /** Return the X coordinate of the point. **/
-    public double getX() {
-        return xCoord;
-    }
-
-    /** Return the Y coordinate of the point. **/
-    public double getY() {
-        return yCoord;
     }
 
     /** Return the Z coordinate of the point. **/
@@ -40,18 +25,22 @@ public class Point3d {
         return zCoord;
     }
 
-    /** Set the X coordinate of the point. **/
-    public void setX(double val) {
-        xCoord = val;
-    }
-
-    /** Set the Y coordinate of the point. **/
-    public void setY(double val) {
-        yCoord = val;
-    }
-
     /** Set the Z coordinate of the point. **/
     public void setZ(double val) {
         zCoord = val;
+    }
+
+    /** Compare values of two 3d points */
+    public boolean equals(Point3d point) {
+        return point.getX() == xCoord && point.getY() == yCoord && point.getZ() == zCoord;
+    }
+
+    /** Measure distance between two 3d points */
+    public double distanceTo(Point3d point) {
+        double xArg = Math.pow(point.getX() - this.getX(), 2);
+        double yArg = Math.pow(point.getY() - this.getY(), 2);
+        double zArg = Math.pow(point.getZ() - this.getZ(), 2);
+
+        return Math.sqrt(xArg + yArg + zArg);
     }
 }
