@@ -68,7 +68,7 @@ public class AStarState {
      * waypoint's "previous cost" value is less than the current waypoint's
      * "previous cost" value.
      **/
-    public boolean addOpenWaypoint(Waypoint newWP) {
+    public void addOpenWaypoint(Waypoint newWP) {
         Iterator<HashMap.Entry<Location, Waypoint>> it = this.openWaypoints.entrySet().iterator();
         Location newLocation = newWP.getLocation();
         Waypoint sameLocationWaypoint = null;
@@ -82,13 +82,9 @@ public class AStarState {
             }
         }
 
-        /* new location - add waypoint */
         if (sameLocationWaypoint == null || sameLocationWaypoint.getPreviousCost() > newWP.getPreviousCost()) {
             this.openWaypoints.put(newLocation, newWP);
-            return true;
         }
-
-        return false;
     }
 
     /** Returns the current number of open waypoints. **/

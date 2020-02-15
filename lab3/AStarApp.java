@@ -219,7 +219,7 @@ public class AStarApp {
      * this time.
      **/
     public static void main(String[] args) {
-        AStarApp app = new AStarApp(20, 7);
+        AStarApp app = new AStarApp(40, 30);
         app.start();
     }
 }

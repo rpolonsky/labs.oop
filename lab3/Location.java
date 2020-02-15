@@ -23,8 +23,12 @@ public class Location {
     }
 
     /** Compare values of two locations */
-    public boolean equals(Location loc) {
-        return loc.xCoord == xCoord && loc.yCoord == yCoord;
+    public boolean equals(Object obj) {
+        if (obj instanceof Location) {
+            Location loc = (Location) obj;
+            return xCoord == loc.xCoord && yCoord == loc.yCoord;
+        }
+        return false;
     }
 
     /* hashCode implementation */
