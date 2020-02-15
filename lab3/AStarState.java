@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Iterator;
+
 /**
  * This class stores the basic state necessary for the A* algorithm to compute a
  * path across a map. This state includes a collection of "open waypoints" and
@@ -9,6 +12,11 @@ public class AStarState {
     /** This is a reference to the map that the A* algorithm is navigating. **/
     private Map2D map;
 
+    /** Open waypoints */
+    public HashMap<Location, Waypoint> openWaypoints;
+    /** Close waypoints */
+    public HashMap<Location, Waypoint> closeWaypoints;
+
     /**
      * Initialize a new state object for the A* pathfinding algorithm to use.
      **/
@@ -17,6 +25,8 @@ public class AStarState {
             throw new NullPointerException("map cannot be null");
 
         this.map = map;
+        this.openWaypoints = new HashMap<Location, Waypoint>();
+        this.closeWaypoints = new HashMap<Location, Waypoint>();
     }
 
     /** Returns the map that the A* pathfinder is navigating. **/
@@ -30,8 +40,23 @@ public class AStarState {
      * <code>null</code>.
      **/
     public Waypoint getMinOpenWaypoint() {
-        // TODO: Implement.
-        return null;
+        if (openWaypoints.isEmpty()) {
+            return null;
+        }
+
+        Waypoint minCostWaypoint = null;
+        Iterator<HashMap.Entry<Location, Waypoint>> it = this.openWaypoints.entrySet().iterator();
+
+        while (it.hasNext()) {
+            HashMap.Entry<Location, Waypoint> pair = it.next();
+            Waypoint w = pair.getValue();
+
+            if (minCostWaypoint == null || w.getTotalCost() < minCostWaypoint.getTotalCost()) {
+                minCostWaypoint = w;
+            }
+        }
+
+        return minCostWaypoint;
     }
 
     /**
@@ -44,14 +69,31 @@ public class AStarState {
      * "previous cost" value.
      **/
     public boolean addOpenWaypoint(Waypoint newWP) {
-        // TODO: Implement.
+        Iterator<HashMap.Entry<Location, Waypoint>> it = this.openWaypoints.entrySet().iterator();
+        Location newLocation = newWP.getLocation();
+        Waypoint sameLocationWaypoint = null;
+
+        while (sameLocationWaypoint == null && it.hasNext()) {
+            HashMap.Entry<Location, Waypoint> pair = (HashMap.Entry<Location, Waypoint>) it.next();
+            Location l = pair.getKey();
+
+            if (l.equals(newLocation)) {
+                sameLocationWaypoint = pair.getValue();
+            }
+        }
+
+        /* new location - add waypoint */
+        if (sameLocationWaypoint == null || sameLocationWaypoint.getPreviousCost() > newWP.getPreviousCost()) {
+            this.openWaypoints.put(newLocation, newWP);
+            return true;
+        }
+
         return false;
     }
 
     /** Returns the current number of open waypoints. **/
     public int numOpenWaypoints() {
-        // TODO: Implement.
-        return 0;
+        return this.openWaypoints.size();
     }
 
     /**
@@ -59,7 +101,10 @@ public class AStarState {
      * to the closed list.
      **/
     public void closeWaypoint(Location loc) {
-        // TODO: Implement.
+        Waypoint w = this.openWaypoints.get(loc);
+
+        this.openWaypoints.remove(loc);
+        this.closeWaypoints.put(loc, w);
     }
 
     /**
@@ -67,7 +112,6 @@ public class AStarState {
      * the specified location.
      **/
     public boolean isLocationClosed(Location loc) {
-        // TODO: Implement.
-        return false;
+        return this.closeWaypoints.containsKey(loc);
     }
 }
