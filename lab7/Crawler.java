@@ -58,6 +58,7 @@ public class Crawler {
         } catch (UnknownServiceException e) {
         } catch (MalformedURLException e) {
             System.out.println(e.getMessage());
+        } catch (Exception e) {
         }
     }
 }
