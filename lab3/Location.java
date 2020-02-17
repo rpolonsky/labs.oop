@@ -7,7 +7,6 @@ import java.util.Objects;
 public class Location {
     /** X coordinate of this location. **/
     public int xCoord;
-
     /** Y coordinate of this location. **/
     public int yCoord;
 
@@ -31,7 +30,7 @@ public class Location {
         return false;
     }
 
-    /* hashCode implementation */
+    /** hashCode implementation */
     public int hashCode() {
         return Objects.hash(xCoord, yCoord);
     }

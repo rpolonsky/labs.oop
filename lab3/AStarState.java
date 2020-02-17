@@ -11,7 +11,6 @@ import java.util.Iterator;
 public class AStarState {
     /** This is a reference to the map that the A* algorithm is navigating. **/
     private Map2D map;
-
     /** Open waypoints */
     public HashMap<Location, Waypoint> openWaypoints;
     /** Close waypoints */
@@ -43,7 +42,6 @@ public class AStarState {
         if (openWaypoints.isEmpty()) {
             return null;
         }
-
         Waypoint minCostWaypoint = null;
         Iterator<HashMap.Entry<Location, Waypoint>> it = this.openWaypoints.entrySet().iterator();
 
